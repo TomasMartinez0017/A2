@@ -99,10 +99,11 @@ void insertar(AVL*& a, int elemento){
         }
 
     }
+    //PREGUNTAR COMO HACER CON REPETIDOS
     else{
+        //insertar(a->der, elemento);
         varioH = false;
     }
-
 }
 
 void imprimirOrdenado(AVL* a){
