@@ -124,6 +124,6 @@ int main(){
         desencolar();
         insertar(min->sig);
     }
-
+    
     return 0;
 }
