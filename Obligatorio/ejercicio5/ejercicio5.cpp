@@ -61,7 +61,7 @@ void dijkstra(int origen, int cantVertices) {
         if(v != -1) {
             visitados[v] = true;
             for(int w=1; w<=cantVertices; w++) {
-                if(grafo[v][w] != INF) {
+                if(!visitados[w] && grafo[v][w] != INF) {
                     if(costos[w] > costos[v] + grafo[v][w]) {
                         costos[w] = costos[v] + grafo[v][w];
                         vengo[w] = v;

@@ -7,6 +7,7 @@ struct Nodo{
     Nodo* sig;
 };
 
+
 unsigned int funcHash(string& key){
     unsigned int hashVal = 0;
     for(int i = 0; i < key.length(); i++){
