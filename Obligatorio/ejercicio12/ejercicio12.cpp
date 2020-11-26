@@ -55,101 +55,63 @@ void facultadBT(int xCandidato, int yCandidato, int xDestino, int yDestino, char
         }
     }
 }
-
-int main(){
+void imprimirMatriz(char** matriz, int m, int n){
+    for (int i = 0; i < n; i++){
+        for(int j= 0; j< m;j++){
+            cout << matriz[i][j] << " ";
+        }
+        cout << endl;
+    }
     
-    /*
+}
+int main(){
     int m;
     int n;
     cin>>m>>n;
-
-    cout<<m<<endl;
-    cout<<n<<endl;
-    */
     
-    char** matriz = new char*[5];
-    for(int i = 0; i < 5; i++){
-        matriz[i] = new char[5];
+    char** matriz = new char*[n];
+    for(int i = 0; i < n; i++){
+        matriz[i] = new char[m];
     }
+
+    int xBedelia;
+    int yBedelia;
     
-    matriz[0][0] = 'P';
-    matriz[0][1] = 'P';
-    matriz[0][2] = 'C';
-    matriz[0][3] = 'P';
-    matriz[0][4] = 'C';
-    matriz[1][0] = 'C';
-    matriz[1][1] = 'C';
-    matriz[1][2] = 'C';
-    matriz[1][3] = 'P';
-    matriz[1][4] = 'P';
-    matriz[2][0] = 'C';
-    matriz[2][1] = 'P';
-    matriz[2][2] = 'C';
-    matriz[2][3] = 'C';
-    matriz[2][4] = 'C';
-    matriz[3][0] = 'C';
-    matriz[3][1] = 'C';
-    matriz[3][2] = 'B';
-    matriz[3][3] = 'P';
-    matriz[3][4] = 'C';
-    matriz[4][0] = 'P';
-    matriz[4][1] = 'C';
-    matriz[4][2] = 'C';
-    matriz[4][3] = 'C';
-    matriz[4][4] = 'C';
-    
-    int xBedelia = 3;
-    int yBedelia = 2;
-    
-    /*
-    for(int i = 0; i < m; i++){
-        cout<<"Entre primer for"<<endl;
-        for(int j = 0; j < n; j++){
-            cout<<"Entre segundo for"<<endl;
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
             char casilla;
             cin>>casilla;
-            cout<<casilla<<endl;
             matriz[i][j] = casilla;
             if(casilla == 'B'){
-                xBedelia = i;
-                yBedelia = j;
+                xBedelia = j;
+                yBedelia = i;
             }
         }
     }
-    */
-    /*
+    imprimirMatriz(matriz, m ,n);
     int p;
     cin>>p;
-    */
     
-    bool** recorrido = new bool*[5];
-    for(int i = 0; i < 5; i++){
-        recorrido[i] = new bool[5];
-    }
-
-    for(int i = 0; i < 5; i++){
+    bool** recorrido = new bool*[n];
+    for(int i = 0; i < n; i++){
+        recorrido[i] = new bool[m];
         for(int j = 0; j < 5; j++){
             recorrido[i][j] = false;
         }
     }
-    /*
+    
     for(int i = 0; i<p; i++){
         int xo;
         int yo;
         int xd;
         int yd;
         cin>>xo>>yo>>xd>>yd;
-        int mejorNroMov = 9999999;
+        int mejorNroMov = INT_MAX;
         
-        facultadBT(xo-1, yo-1, xd-1, yd-1, matriz, recorrido, 0, mejorNroMov, xBedelia - 1, yBedelia - 1, m, n);
-
+        facultadBT(yo-1, xo-1, yd-1, xd-1, matriz, recorrido, 0, mejorNroMov, xBedelia - 1, yBedelia - 1, n, m);
+        if(mejorNroMov == INT_MAX) 
+            mejorNroMov = 0;
         cout<<mejorNroMov<<endl;
     }
-    */
-
-    int mejorNroMov = 9999999;
-    facultadBT(0, 2, 3, 4, matriz, recorrido, 0, mejorNroMov, xBedelia, yBedelia, 5, 5);
-    cout<<mejorNroMov<<endl;
-
     return 0;
 }
