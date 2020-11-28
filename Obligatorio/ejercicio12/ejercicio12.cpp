@@ -3,18 +3,21 @@
 using namespace std;
 
 bool esPosicionValida(int x, int y, char** matriz, int filas, int columnas){
-    if(x>=filas || y>=columnas || x<0 || y<0 || matriz[x][y] == 'P'){ //Revisar >=
+    cout << x << " " << y <<endl;
+    if(x>=columnas || y>=filas || x<0 || y<0 || matriz[y][x] == 'P'){ //Revisar >=
+        cout << matriz[y][x] << endl;
         return false;
     }
+    cout << matriz[y][x] << endl;
     return true;
 }
 
 bool pase(int x, int y, bool** recorrido){
-    return recorrido[x][y] == true;
+    return recorrido[y][x] == true;
 }
 
 void probarCasilla(int x, int y, bool** recorrido){
-    recorrido[x][y] = true;
+    recorrido[y][x] = true;
 }
 
 bool llegueDestino(int xCandidato, int yCandidato, int xDestino, int yDestino){
@@ -22,11 +25,11 @@ bool llegueDestino(int xCandidato, int yCandidato, int xDestino, int yDestino){
 }
 
 bool pasePorBedelia(int xB, int yB, bool** recorrido){
-    return recorrido[xB][yB] == true;
+    return recorrido[yB][xB] == true;
 }
 
 void retiroCasilla(int xC, int yC, bool** recorrido){
-    recorrido[xC][yC] = false;
+    recorrido[yC][xC] = false;
 }
 
 void facultadBT(int xCandidato, int yCandidato, int xDestino, int yDestino, char** matriz, bool** recorrido, int nroMov, int& mejorNroMov, int xBedelia, int yBedelia, int filas, int columnas){
@@ -48,7 +51,7 @@ void facultadBT(int xCandidato, int yCandidato, int xDestino, int yDestino, char
 
                 for(int i = 0; i < 4; i++){
                     
-                    facultadBT(xCandidato + dFilas[i], yCandidato + dColumnas[i], xDestino, yDestino, matriz, recorrido, nroMov + 1, mejorNroMov, xBedelia, yBedelia, filas, columnas);
+                    facultadBT(xCandidato + dColumnas[i], yCandidato + dFilas[i], xDestino, yDestino, matriz, recorrido, nroMov + 1, mejorNroMov, xBedelia, yBedelia, filas, columnas);
                 }
             }
             retiroCasilla(xCandidato, yCandidato, recorrido);
@@ -95,7 +98,7 @@ int main(){
     bool** recorrido = new bool*[n];
     for(int i = 0; i < n; i++){
         recorrido[i] = new bool[m];
-        for(int j = 0; j < 5; j++){
+        for(int j = 0; j < m; j++){
             recorrido[i][j] = false;
         }
     }
@@ -108,7 +111,7 @@ int main(){
         cin>>xo>>yo>>xd>>yd;
         int mejorNroMov = INT_MAX;
         
-        facultadBT(yo-1, xo-1, yd-1, xd-1, matriz, recorrido, 0, mejorNroMov, xBedelia - 1, yBedelia - 1, n, m);
+        facultadBT(xo-1, yo-1, xd-1, yd-1, matriz, recorrido, 1, mejorNroMov,  xBedelia - 1,yBedelia - 1, n, m);
         if(mejorNroMov == INT_MAX) 
             mejorNroMov = 0;
         cout<<mejorNroMov<<endl;
