@@ -5,6 +5,7 @@ using namespace std;
 struct AVL{
     int dato;
     int bal;
+    int cantidad;
     AVL* izq;
     AVL* der;
 };
@@ -21,6 +22,7 @@ void insertar(AVL*& a, int elemento){
         a->izq = NULL;
         a->der = NULL;
         a->bal = 0;
+        a->cantidad = 1;
         varioH = true;
     }
     else if(a->dato > elemento){
@@ -102,6 +104,7 @@ void insertar(AVL*& a, int elemento){
     //PREGUNTAR COMO HACER CON REPETIDOS
     else{
         //insertar(a->der, elemento);
+        a->cantidad++;
         varioH = false;
     }
 }
@@ -109,7 +112,8 @@ void insertar(AVL*& a, int elemento){
 void imprimirOrdenado(AVL* a){
     if(a!=NULL){
         imprimirOrdenado(a->izq);
-        cout<<a->dato<<endl;
+        for(int i = 0; i< a->cantidad; i++)
+            cout<<a->dato<<endl;
         imprimirOrdenado(a->der);
     }
 }
