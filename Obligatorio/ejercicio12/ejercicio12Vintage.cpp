@@ -31,7 +31,7 @@ void facultadBT(int xCandidato, int yCandidato, int xDestino, int yDestino, char
         if(esPosicionValida(xCandidato, yCandidato, matriz, filas, columnas) && !pase(xCandidato, yCandidato, recorrido)) {
             probarCasilla(xCandidato, yCandidato, recorrido);
 
-            if(llegueDestino(xCandidato, yCandidato, xDestino, yDestino) && (nroMov < mejorNroMov)){ //&& pasePorBedelia(xBedelia, yBedelia, recorrido) {
+            if(llegueDestino(xCandidato, yCandidato, xDestino, yDestino) && pasePorBedelia(xBedelia, yBedelia, recorrido) && (nroMov < mejorNroMov)){
 
                 mejorNroMov = nroMov;
             }
@@ -102,26 +102,12 @@ int main(){
 
         cin>>columnaOrigen>>filaOrigen>>columnaDestino>>filaDestino;
 
-        int mejorNroMov1 = INT_MAX;
-        int mejorNroMov2 = INT_MAX;
-        facultadBT(filaOrigen-1, columnaOrigen-1, xBedelia, yBedelia, matriz, recorrido, 1, mejorNroMov2,  xBedelia, yBedelia, filas, columnas);
-        facultadBT(xBedelia, yBedelia, filaDestino-1, columnaDestino-1, matriz, recorrido, 0, mejorNroMov1,  xBedelia, yBedelia, filas, columnas);
-        
-        if(mejorNroMov2 == INT_MAX){
-            mejorNroMov2 = 0;
+        int mejorNroMov = INT_MAX;
+        facultadBT(filaOrigen-1, columnaOrigen-1, filaDestino-1, columnaDestino-1, matriz, recorrido, 1, mejorNroMov,  xBedelia, yBedelia, filas, columnas);
+        if(mejorNroMov == INT_MAX){
+            mejorNroMov = 0;
         }
-        if(mejorNroMov1 == INT_MAX){
-            mejorNroMov1 = 0;
-        }
-
-        if(mejorNroMov1 == 0){
-            mejorNroMov2 = 0;
-        }
-        if(mejorNroMov2 == 0){
-            mejorNroMov1 = 0;
-        }
-
-        cout<<mejorNroMov2 + mejorNroMov1<<endl;
+        cout<<mejorNroMov<<endl;
     }
     return 0;
 }
